@@ -59,3 +59,6 @@
 
 /* Specifies the number of pulses the encoder registers between each detent */
 #define ENCODER_RESOLUTION 4
+
+#define QMK_KEYS_PER_SCAN 12
+#define TAPPING_TOGGLE 2
