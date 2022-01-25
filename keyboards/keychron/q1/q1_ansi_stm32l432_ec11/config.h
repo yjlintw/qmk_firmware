@@ -47,6 +47,8 @@
 /* Set the maxium brightness as 190 in order to limit the current to 450mA */
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 190
 
+#define RGB_MATRIX_KEYPRESSES
+
 /* Set USB polling rate as 1 milliseconds */
 #define USB_POLLING_INTERVAL_MS 1
 
@@ -62,3 +64,5 @@
 
 #define QMK_KEYS_PER_SCAN 12
 #define TAPPING_TOGGLE 2
+#define TAPPING_TERM 175
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8
