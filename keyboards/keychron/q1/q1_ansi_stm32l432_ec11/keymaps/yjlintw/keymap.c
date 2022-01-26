@@ -197,44 +197,46 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 #endif
 
+void reset_rgb(int index)
+{
+    HSV curr = rgb_matrix_get_hsv();
+    RGB rgb = hsv_to_rgb(curr);
+    rgb_matrix_set_color(index, rgb.r, rgb.g, rgb.b);
+}
+
 void rgb_matrix_indicators_user(void) {
     HSV curr = rgb_matrix_get_hsv();
-    HSV red = {0, 255, curr.v};
-    RGB rgb_white = hsv_to_rgb(curr);
-    RGB rgb_red = hsv_to_rgb(red);
+    HSV contrast = {0, 255, curr.v};
+    RGB rgb_contrast = hsv_to_rgb(contrast);
 
+    for (int i = 1; i <= 7; i++)
+    {
+        reset_rgb(i);
+    }
     switch (get_highest_layer(layer_state))
     {
         case WIN_BASE:
-            rgb_matrix_set_color_all(rgb_white.r, rgb_white.g, rgb_white.b);
             break;
         case WIN_FN:
-            rgb_matrix_set_color_all(rgb_white.r, rgb_white.g, rgb_white.b);
-            rgb_matrix_set_color(1, rgb_red.r, rgb_red.g, rgb_red.b);
+            rgb_matrix_set_color(1, rgb_contrast.r, rgb_contrast.g, rgb_contrast.b);
             break;
         case WIN_NUM:
-            rgb_matrix_set_color_all(rgb_white.r, rgb_white.g, rgb_white.b);
-            rgb_matrix_set_color(2, rgb_red.r, rgb_red.g, rgb_red.b);
+            rgb_matrix_set_color(2, rgb_contrast.r, rgb_contrast.g, rgb_contrast.b);
             break;
         case WIN_EXTRA:
-            rgb_matrix_set_color_all(rgb_white.r, rgb_white.g, rgb_white.b);
-            rgb_matrix_set_color(3, rgb_red.r, rgb_red.g, rgb_red.b);
+            rgb_matrix_set_color(3, rgb_contrast.r, rgb_contrast.g, rgb_contrast.b);
             break;
         case WIN_GAME:
-            rgb_matrix_set_color_all(rgb_white.r, rgb_white.g, rgb_white.b);
-            rgb_matrix_set_color(4, rgb_red.r, rgb_red.g, rgb_red.b);
+            rgb_matrix_set_color(4, rgb_contrast.r, rgb_contrast.g, rgb_contrast.b);
             break;
         case LAYER_EXTRA1:
-            rgb_matrix_set_color_all(rgb_white.r, rgb_white.g, rgb_white.b);
-            rgb_matrix_set_color(5, rgb_red.r, rgb_red.g, rgb_red.b);
+            rgb_matrix_set_color(5, rgb_contrast.r, rgb_contrast.g, rgb_contrast.b);
             break;
         case LAYER_EXTRA2:
-            rgb_matrix_set_color_all(rgb_white.r, rgb_white.g, rgb_white.b);
-            rgb_matrix_set_color(6, rgb_red.r, rgb_red.g, rgb_red.b);
+            rgb_matrix_set_color(6, rgb_contrast.r, rgb_contrast.g, rgb_contrast.b);
             break;
         case LAYER_EXTRA3:
-            rgb_matrix_set_color_all(rgb_white.r, rgb_white.g, rgb_white.b);
-            rgb_matrix_set_color(7, rgb_red.r, rgb_red.g, rgb_red.b);
+            rgb_matrix_set_color(7, rgb_contrast.r, rgb_contrast.g, rgb_contrast.b);
             break;
     }
 
